@@ -1,9 +1,31 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  NonNullableFormBuilder,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserDTO } from 'src/app/Models/user.dto';
 import { HeaderMenusService } from 'src/app/Services/header-menus.service';
 import { SharedService } from 'src/app/Services/shared.service';
 import { UserService } from 'src/app/Services/user.service';
+import { HeaderMenus } from '../../Models/header-menus.dto';
+
+// TODO: implementar tipo RegisterFormModel
+type RegisterFormModel = {
+  name: FormControl<string>;
+  surname_1: FormControl<string>;
+  surname_2: FormControl<string>;
+  alias: FormControl<string>;
+  birth_date: FormControl<string>;
+  email: FormControl<string>;
+  password: FormControl<string>;
+};
+
+// Patró data de naixement DD/MM/YYYY
+const BIRTHDATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 
 @Component({
   selector: 'app-register',
@@ -11,9 +33,6 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  /*
-  // TODO: implementar tipo RegisterFormModel
-
   // TODO 16
   registerUser: UserDTO;
 
@@ -27,28 +46,83 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup<RegisterFormModel>;
   isValidForm: boolean | null;
-*/
+  submitted = false;
+  isSubmitting = false;
+
   constructor(
-    private formBuilder: FormBuilder,
     private userService: UserService,
     private sharedService: SharedService,
     private headerMenusService: HeaderMenusService,
     private router: Router,
+    private fb: NonNullableFormBuilder,
   ) {
     // TODO 17
+    this.registerUser = new UserDTO('', '', '', '', new Date(), '', '');
+    this.isValidForm = null;
+
+    this.name = this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25),
+      ],
+    });
+    this.surname_1 = this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25),
+      ],
+    });
+    this.surname_2 = this.fb.control('', {
+      validators: [Validators.minLength(5), Validators.maxLength(25)],
+    });
+    this.alias = this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(25),
+      ],
+    });
+    this.birth_date = this.fb.control('', {
+      validators: [Validators.required, Validators.pattern(BIRTHDATE_PATTERN)],
+    });
+    this.email = this.fb.control('', {
+      validators: [Validators.required, Validators.email],
+    });
+    this.password = this.fb.control('', {
+      validators: [
+        Validators.required,
+        Validators.minLength(8),
+        Validators.maxLength(16),
+      ],
+    });
+
+    this.registerForm = this.fb.group<RegisterFormModel>({
+      name: this.name,
+      surname_1: this.surname_1,
+      surname_2: this.surname_2,
+      alias: this.alias,
+      birth_date: this.birth_date,
+      email: this.email,
+      password: this.password,
+    });
   }
 
   ngOnInit(): void {}
 
   async register(): Promise<void> {
-    /*
+    this.submitted = true;
+    this.registerForm.markAllAsTouched();
+
+    if (this.registerForm.invalid) return;
+    if (this.isSubmitting) return;
+
+    this.isSubmitting = true;
+
     let responseOK = false;
     this.isValidForm = false;
     let errorResponse: any;
-
-    if (this.registerForm.invalid) {
-      return;
-    }
 
     this.isValidForm = true;
 
@@ -84,6 +158,8 @@ export class RegisterComponent implements OnInit {
       this.headerMenusService.headerManagement.next(headerInfo);
 
       this.sharedService.errorLog(errorResponse);
+    } finally {
+      this.isSubmitting = false;
     }
 
     await this.sharedService.managementToast(
@@ -98,8 +174,8 @@ export class RegisterComponent implements OnInit {
       // Volver a setear el birth_date por defecto
       this.birth_date.setValue(formatDate(new Date(), 'yyyy-MM-dd', 'en'));
 
+      this.submitted = false;
       this.router.navigateByUrl('home');
     }
-    */
   }
 }
