@@ -5,4 +5,205 @@
   <h1>Profile</h1>
 
   <!-- TODO 6 -->
+  <form [formGroup]="profileForm" (ngSubmit)="updateUser()" novalidate>
+    <!-- NAME -->
+    <div>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        [formControl]="name"
+        [attr.aria-invalid]="
+          name.invalid && (name.touched || submitted) ? 'true' : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="name.invalid && (name.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span *ngIf="name.errors?.['required']">Name is required.</span>
+          <span *ngIf="name.errors?.['minlength'] || name.errors?.['maxlength']"
+            >Name must be between 5 and 25 characters.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <!-- SURNAME 1 -->
+    <div>
+      <label for="surname_1">Surname 1:</label>
+      <input
+        type="text"
+        id="surname_1"
+        [formControl]="surname_1"
+        [attr.aria-invalid]="
+          surname_1.invalid && (surname_1.touched || submitted)
+            ? 'true'
+            : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="surname_1.invalid && (surname_1.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span *ngIf="surname_1.errors?.['required']"
+            >Surname 1 is required.</span
+          >
+          <span
+            *ngIf="
+              surname_1.errors?.['minlength'] || surname_1.errors?.['maxlength']
+            "
+            >Surname 1 must be between 5 and 25 characters.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <!-- SURNAME 2 (optional) -->
+    <div>
+      <label for="surname_2">Surname 2:</label>
+      <input
+        type="text"
+        id="surname_2"
+        [formControl]="surname_2"
+        [attr.aria-invalid]="
+          surname_2.invalid && (surname_2.touched || submitted)
+            ? 'true'
+            : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="surname_2.invalid && (surname_2.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span
+            *ngIf="
+              surname_2.errors?.['minlength'] || surname_2.errors?.['maxlength']
+            "
+            >Surname 2 must be between 5 and 25 characters.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <!-- ALIAS -->
+    <div>
+      <label for="alias">Alias:</label>
+      <input
+        type="text"
+        id="alias"
+        [formControl]="alias"
+        [attr.aria-invalid]="
+          alias.invalid && (alias.touched || submitted) ? 'true' : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="alias.invalid && (alias.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span *ngIf="alias.errors?.['required']">Alias is required.</span>
+          <span
+            *ngIf="alias.errors?.['minlength'] || alias.errors?.['maxlength']"
+            >Alias must be between 5 and 25 characters.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <!-- BIRTH DATE -->
+    <div>
+      <label for="birth_date">Birth Date:</label>
+      <input
+        type="date"
+        id="birth_date"
+        [formControl]="birth_date"
+        [attr.aria-invalid]="
+          birth_date.invalid && (birth_date.touched || submitted)
+            ? 'true'
+            : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="birth_date.invalid && (birth_date.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span *ngIf="birth_date.errors?.['required']"
+            >Birth date is required.</span
+          >
+          <span *ngIf="birth_date.errors?.['pattern']"
+            >The format must be yyyy-mm-dd.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <!-- EMAIL -->
+    <div>
+      <label for="email">Email:</label>
+      <input
+        type="email"
+        id="email"
+        [formControl]="email"
+        [attr.aria-invalid]="
+          email.invalid && (email.touched || submitted) ? 'true' : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="email.invalid && (email.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span *ngIf="email.errors?.['required']">Email is required.</span>
+          <span *ngIf="email.errors?.['email']"
+            >The email does not have a valid format.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <!-- PASSWORD -->
+    <div>
+      <label for="password">Password:</label>
+      <input
+        type="password"
+        id="password"
+        [formControl]="password"
+        [attr.aria-invalid]="
+          password.invalid && (password.touched || submitted) ? 'true' : 'false'
+        "
+      />
+      <div class="error-container">
+        <small
+          *ngIf="password.invalid && (password.touched || submitted)"
+          role="alert"
+          class="error"
+        >
+          <span *ngIf="password.errors?.['required']"
+            >Password is required.</span
+          >
+          <span
+            *ngIf="
+              password.errors?.['minlength'] || password.errors?.['maxlength']
+            "
+            >Password must be between 8 and 16 characters.</span
+          >
+        </small>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="isSubmitting">
+      {{ isSubmitting ? "Submitting..." : "Update" }}
+    </button>
+  </form>
 </div>
