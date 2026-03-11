@@ -17,7 +17,7 @@ export class CategoriesListComponent {
     private categoryService: CategoryService,
     private router: Router,
     private localStorageService: LocalStorageService,
-    private sharedService: SharedService
+    private sharedService: SharedService,
   ) {
     this.loadCategories();
   }
@@ -27,9 +27,8 @@ export class CategoriesListComponent {
     const userId = this.localStorageService.get('user_id');
     if (userId) {
       try {
-        this.categories = await this.categoryService.getCategoriesByUserId(
-          userId
-        );
+        this.categories =
+          await this.categoryService.getCategoriesByUserId(userId);
       } catch (error: any) {
         errorResponse = error.error;
         this.sharedService.errorLog(errorResponse);
@@ -39,10 +38,12 @@ export class CategoriesListComponent {
 
   createCategory(): void {
     // TODO 7
+    this.router.navigateByUrl('/user/category/');
   }
 
   updateCategory(categoryId: string): void {
     // TODO 8
+    this.router.navigateByUrl('/user/category/' + categoryId);
   }
 
   async deleteCategory(categoryId: string): Promise<void> {
@@ -50,15 +51,15 @@ export class CategoriesListComponent {
 
     // show confirmation popup
     let result = confirm(
-      'Confirm delete category with id: ' + categoryId + ' .'
+      'Confirm delete category with id: ' + categoryId + ' .',
     );
     if (result) {
       try {
-        const rowsAffected = await this.categoryService.deleteCategory(
-          categoryId
-        );
+        const rowsAffected =
+          await this.categoryService.deleteCategory(categoryId);
         if (rowsAffected.affected > 0) {
           // TODO 9
+          this.loadCategories();
         }
       } catch (error: any) {
         errorResponse = error.error;
