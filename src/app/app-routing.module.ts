@@ -38,6 +38,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
+    path: 'user/post',
+    component: PostFormComponent,
+    canActivate: [AuthGuard],
+  },
+  {
     path: 'categories',
     component: CategoriesListComponent,
     canActivate: [AuthGuard],
