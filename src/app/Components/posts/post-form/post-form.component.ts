@@ -204,8 +204,6 @@ export class PostFormComponent implements OnInit {
       categories.includes(category.categoryId),
     );
 
-    // The form stores UI-friendly values (date string + selected category ids).
-    // Here we map them to the DTO structure expected by the API.
     this.post = new PostDTO(
       title,
       description,
@@ -220,5 +218,9 @@ export class PostFormComponent implements OnInit {
     } else {
       await this.createPost();
     }
+  }
+
+  cancel(): void {
+    this.router.navigateByUrl('posts');
   }
 }

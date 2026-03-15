@@ -170,4 +170,8 @@ export class CategoryFormComponent implements OnInit {
       this.validRequest = await this.createCategory();
     }
   }
+
+  cancel(): void {
+    this.router.navigateByUrl('categories');
+  }
 }

@@ -10,7 +10,7 @@
   >
     <div>
       <label for="title">Title:</label>
-      <input type="text" [formControl]="title" />
+      <input type="text" id="title" [formControl]="title" />
 
       <div *ngIf="title.errors">
         <div
@@ -28,7 +28,7 @@
 
     <div>
       <label for="description">Description:</label>
-      <input type="text" [formControl]="description" />
+      <input type="text" id="description" [formControl]="description" />
 
       <div *ngIf="description.errors">
         <div
@@ -45,8 +45,8 @@
     </div>
 
     <div>
-      <label for="description">Css color:</label>
-      <input type="text" [formControl]="css_color" />
+      <label for="css_color">Css color:</label>
+      <input type="text" id="css_color" [formControl]="css_color" />
 
       <div *ngIf="css_color.errors">
         <div
@@ -63,5 +63,6 @@
     </div>
 
     <button type="submit">SAVE</button>
+    <button type="button" (click)="cancel()">CANCEL</button>
   </form>
 </div>
