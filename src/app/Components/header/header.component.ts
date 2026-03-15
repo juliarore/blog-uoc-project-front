@@ -60,6 +60,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('register');
   }
 
+  dashboard(): void {
+    this.router.navigateByUrl('dashboard');
+  }
+
   adminPosts(): void {
     this.router.navigateByUrl('posts');
   }

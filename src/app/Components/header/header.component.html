@@ -2,6 +2,7 @@
 
 <!-- NO AUTH REQUIRED -->
 <div *ngIf="showNoAuthSection">
+  <button (click)="dashboard()">Dashboard</button>
   <button (click)="home()">Home</button>
   <button (click)="login()">Login</button>
   <button (click)="register()">Register</button>
@@ -9,6 +10,7 @@
 
 <!-- AUTH REQUIRED -->
 <div *ngIf="showAuthSection">
+  <button (click)="dashboard()">Dashboard</button>
   <button (click)="home()">Home</button>
   <button (click)="adminPosts()">Admin posts</button>
   <button (click)="adminCategories()">Admin categories</button>
