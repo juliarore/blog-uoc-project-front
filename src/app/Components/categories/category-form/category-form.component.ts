@@ -164,7 +164,6 @@ export class CategoryFormComponent implements OnInit {
     const { title, description, css_color } = this.categoryForm.getRawValue();
     this.category = new CategoryDTO(title, description, css_color);
 
-    // TODO 10
     if (this.isUpdateMode) {
       this.validRequest = await this.editCategory();
     } else {

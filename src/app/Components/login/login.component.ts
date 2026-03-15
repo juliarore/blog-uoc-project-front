@@ -24,7 +24,6 @@ type LoginFormModel = {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  // TODO 19
   loginUser: AuthDTO;
   email: FormControl<string>;
   password: FormControl<string>;
@@ -44,7 +43,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private fb: NonNullableFormBuilder,
   ) {
-    // TODO 20
     this.loginUser = new AuthDTO('', '', '', '');
 
     this.email = this.fb.control('', {

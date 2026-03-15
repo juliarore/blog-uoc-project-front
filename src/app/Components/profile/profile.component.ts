@@ -30,9 +30,6 @@ const BIRTHDATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  // TODO: implementar tipo ProfileFormModel
-
-  // TODO 4
   profileUser: UserDTO;
 
   name: FormControl<string>;
@@ -54,7 +51,6 @@ export class ProfileComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private fb: NonNullableFormBuilder,
   ) {
-    // TODO 5
     this.profileUser = new UserDTO('', '', '', '', new Date(), '', '');
     this.isValidForm = null;
 

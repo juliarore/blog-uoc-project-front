@@ -13,7 +13,6 @@ import { SharedService } from 'src/app/Services/shared.service';
 import { UserService } from 'src/app/Services/user.service';
 import { HeaderMenus } from '../../Models/header-menus.dto';
 
-// TODO: implementar tipo RegisterFormModel
 type RegisterFormModel = {
   name: FormControl<string>;
   surname_1: FormControl<string>;
@@ -33,7 +32,6 @@ const BIRTHDATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  // TODO 16
   registerUser: UserDTO;
 
   name: FormControl<string>;
@@ -56,7 +54,6 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private fb: NonNullableFormBuilder,
   ) {
-    // TODO 17
     this.registerUser = new UserDTO('', '', '', '', new Date(), '', '');
     this.isValidForm = null;
 

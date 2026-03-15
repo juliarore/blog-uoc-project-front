@@ -4,8 +4,7 @@
 <div>
   <h1>Login</h1>
 
-  <!-- TODO 21 -->
-   <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
     <!-- EMAIL -->
     <div>
       <label for="email">Email:</label>
@@ -37,9 +36,7 @@
         id="password"
         [formControl]="password"
         [attr.aria-invalid]="
-          password.invalid && (password.touched || submitted)
-            ? 'true'
-            : 'false'
+          password.invalid && (password.touched || submitted) ? 'true' : 'false'
         "
       />
       <div class="error-container">
@@ -65,6 +62,5 @@
     <button type="submit" [disabled]="isSubmitting">
       {{ isSubmitting ? "Submitting..." : "Login" }}
     </button>
-
-   </form>
+  </form>
 </div>
