@@ -23,14 +23,29 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.syncHeaderWithSession();
+
     this.headerMenusService.headerManagement.subscribe(
       (headerInfo: HeaderMenus) => {
+        const hasToken = !!this.localStorageService.get('access_token');
+        if (hasToken) {
+          this.showAuthSection = true;
+          this.showNoAuthSection = false;
+          return;
+        }
+
         if (headerInfo) {
           this.showAuthSection = headerInfo.showAuthSection;
           this.showNoAuthSection = headerInfo.showNoAuthSection;
         }
       },
     );
+  }
+
+  private syncHeaderWithSession(): void {
+    const hasToken = !!this.localStorageService.get('access_token');
+    this.showAuthSection = hasToken;
+    this.showNoAuthSection = !hasToken;
   }
 
   home(): void {

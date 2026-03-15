@@ -1,1 +1,35 @@
-<!-- TODO 3 -->
+<section class="home-feed">
+  <article class="post-card" *ngFor="let post of posts">
+    <h2 class="post-card__title">{{ post.title }}</h2>
+
+    <div class="post-card__categories">
+      <span
+        class="post-card__category"
+        *ngFor="let category of post.categories"
+        [style.background-color]="
+          getCategoryBackgroundColor(category.css_color)
+        "
+      >
+        {{ category.title }}
+      </span>
+    </div>
+
+    <p class="post-card__description">{{ post.description }}</p>
+    <p class="post-card__date">
+      Publication date: {{ post.publication_date | formatDate: 3 }}
+    </p>
+    <p class="post-card__author">Published by: {{ post.userAlias }}</p>
+
+    <div class="post-card__reactions">
+      <div class="post-card__metrics">
+        <span>Likes: {{ post.num_likes }}</span>
+        <span>Dislikes: {{ post.num_dislikes }}</span>
+      </div>
+
+      <div class="post-card__actions" *ngIf="showButtons">
+        <button type="button" (click)="like(post.postId)">Like</button>
+        <button type="button" (click)="dislike(post.postId)">Dislike</button>
+      </div>
+    </div>
+  </article>
+</section>
